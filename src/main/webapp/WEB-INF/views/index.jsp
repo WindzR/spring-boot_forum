@@ -16,19 +16,28 @@
 
     <title>Форум job4j</title>
 </head>
-<body>
+<body class="container grey lighten-3">
 <div class="container mt-3">
-    <div class="row">
-        <h4>Форум job4j</h4>
-    </div>
+    <nav>
+        <div class="nav-wrapper container light-blue darken-4">
+            <a class="brand-logo center-align">ФОРУМ IT СПЕЦИАЛИСТОВ</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li>
+                    Пользователь: <c:out value="${user.username}"/>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <br><br>
     <div class="row">
         <div>
             <a href='<c:url value='/create'/>'>
                 <i class="material-icons">edit</i>
+                Создать новую тему
             </a>
         </div>
         <table class="table">
-            <thead>
+            <thead class="tableHeader blue darken-4" style="color: whitesmoke">
             <tr>
                 <th scope="col">№</th>
                 <th scope="col">Тема</th>
@@ -37,11 +46,16 @@
                 <th scope="col">Обновить</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody class="tableBody blue lighten-3">
             <c:forEach items="${posts}" var="post" varStatus="count">
                 <tr>
                     <td><c:out value="${count.count}"/></td>
-                    <td><c:out value="${post.name}"/></td>
+                    <td>
+                        <a href='<c:url value="/view?id=${post.id}"/>'>
+                            <i class="material-icons">chat_bubble_outline</i>
+                            <c:out value="${post.name}"/>
+                        </a>
+                    </td>
                     <td><c:out value="${post.description}"/></td>
                     <td>
                         <calendar:formatDate value="${post.created}"

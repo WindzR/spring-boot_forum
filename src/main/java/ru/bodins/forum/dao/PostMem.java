@@ -7,22 +7,30 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Repository
 public class PostMem {
 
+    private final AtomicInteger countID = new AtomicInteger(1);
+
     private final List<Post> posts = new ArrayList<>();
 
     public PostMem() {
-        posts.add(Post.of("Hibernate vs Spring Data",
+        Post hiber = Post.of("Hibernate vs Spring Data",
                 "Выбираем правильный фреймворк для работы с БД",
-                new Date()));
-        posts.add(Post.of("Servlet API",
+                new Date());
+        hiber.setId(countID.getAndIncrement());
+        posts.add(hiber);
+        Post servlet = Post.of("Servlet API",
                 "Фичи при работе с сервлетами и JSP",
-                new Date()));
+                new Date());
+        servlet.setId(countID.getAndIncrement());
+        posts.add(servlet);
     }
 
     public void save(Post post) {
+        post.setId(countID.getAndIncrement());
         posts.add(post);
     }
 

@@ -14,6 +14,16 @@ public class User {
 
     private boolean enabled;
 
+    public User() {
+    }
+
+    public static User of(String username) {
+        User user = new User();
+        user.authority = Authority.of("USER");
+        user.username = username;
+        return user;
+    }
+
     public int getId() {
         return id;
     }

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.bodins.forum.model.Post;
+import ru.bodins.forum.model.User;
 import ru.bodins.forum.service.PostService;
 import java.util.Date;
 
@@ -40,5 +41,16 @@ public class PostControl {
         System.out.println(post);
         model.addAttribute("post", post);
         return "post/update";
+    }
+
+    @GetMapping("/view")
+    public String view(@RequestParam("id") int id, Model model) {
+        System.out.println("****Working controller VIEW****");
+        Post post = service.findPostById(id);
+        User user = User.of("Petr Ivanov");
+        System.out.println(post);
+        model.addAttribute("post", post);
+        model.addAttribute("user", user);
+        return "post/post";
     }
 }
