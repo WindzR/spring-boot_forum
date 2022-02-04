@@ -9,5 +9,5 @@ import java.util.Optional;
 @Repository
 public interface PostRepository extends CrudRepository<Post, Long> {
 
-    public Optional<Post> findPostById(int id);
+    Optional<Post> findPostById(int id);
 }

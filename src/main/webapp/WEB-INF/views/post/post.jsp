@@ -44,7 +44,7 @@
                     <div class="row" style="margin-bottom: 0;">
                         <p class="input-field col s12" style="margin-bottom: 8px">
                             <i class="material-icons">assignment_ind</i>
-                            <strong>${user.username}</strong>,
+                            <strong>${author.name}</strong>,
                             <calendar:formatDate value="${post.created}"
                             pattern="dd-MM-yyyy HH:mm"/>
                         </p>
