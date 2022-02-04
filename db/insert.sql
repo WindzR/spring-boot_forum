@@ -1,0 +1,2 @@
+insert into posts (id, name, description) values (1, 'Hibernate vs Spring Data', 'Обсудим достоинства и недостатки этих фреймворков для работы с БД');
+insert into posts (id, name, description) values (2, 'Servlet API', 'Фичи и особенности при работе с Servlets и JSP');

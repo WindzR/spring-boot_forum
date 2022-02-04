@@ -27,8 +27,8 @@ public class PostControl {
 
     @PostMapping("/save")
     public String save(@ModelAttribute("post")Post post) {
-        Date date = new Date();
-        post.setCreated(date);
+        post.setCreated(new Date());
+        System.out.println(post);
         service.savePost(post);
         return "redirect:/index";
     }

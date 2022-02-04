@@ -1,6 +1,5 @@
 package ru.bodins.forum.dao;
 
-import org.springframework.stereotype.Repository;
 import ru.bodins.forum.model.Post;
 
 import java.util.ArrayList;
@@ -9,7 +8,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 
-@Repository
+/**
+ * @Repository
+ */
 public class PostMem {
 
     private final AtomicInteger countID = new AtomicInteger(1);
