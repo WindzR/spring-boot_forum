@@ -20,11 +20,12 @@ public class IndexControl {
 
     @GetMapping({"/", "/index"})
     public String index(Model model) {
+        System.out.println("****Working controller INDEX****");
         List<Post> postList = posts.getAll();
         model.addAttribute("posts", postList);
         model.addAttribute("user", SecurityContextHolder
                 .getContext().getAuthentication().getPrincipal());
-        System.out.println("Все посты на форуме ---> " + postList);
+//        System.out.println("Все посты на форуме ---> " + postList);
         return "index";
     }
 }

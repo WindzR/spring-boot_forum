@@ -68,6 +68,29 @@
             </div>
         </div>
     </div>
+</div>
+
+<c:forEach items="${post.comments}" var="comment">
+    <div class="col s10 offset-s1">
+        <div class="card horizontal blue lighten-3" style="width: 900px; margin-left: auto; margin-right: auto">
+            <div class="card-stacked row" style="margin-bottom: 0;">
+                <div class="card-content" style="padding-bottom: 10px; padding-top: 10px">
+                    <div class="row" style="margin-bottom: 0;">
+                        <p class="input-field col s12" style="margin-bottom: 8px">
+                            <i class="material-icons">assignment_ind</i>
+                            <strong>${comment.author.name}</strong>,
+                            <calendar:formatDate value="${comment.created}"
+                            pattern="dd-MM-yyyy HH:mm"/>
+                        </p>
+                        <p class="input-field col s12">
+                                ${comment.comment}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</c:forEach>
 
 </body>
 </html>

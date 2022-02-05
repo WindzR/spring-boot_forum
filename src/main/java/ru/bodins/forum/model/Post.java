@@ -2,7 +2,9 @@ package ru.bodins.forum.model;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "posts")
@@ -19,6 +21,12 @@ public class Post {
     @Temporal(TemporalType.TIMESTAMP)
     private Date created;
 
+    @OneToMany(cascade = CascadeType.MERGE)
+    @JoinTable(name = "post_comments",
+        joinColumns = @JoinColumn(name = "post_id"),
+        inverseJoinColumns = @JoinColumn(name = "comment_id"))
+    private Set<Comment> comments = new HashSet<>();
+
     public static Post of(String name) {
         Post post = new Post();
         post.name = name;
@@ -31,6 +39,10 @@ public class Post {
         post.description = description;
         post.created = created;
         return post;
+    }
+
+    public void addComment(Comment comment) {
+        comments.add(comment);
     }
 
     public int getId() {
@@ -65,6 +77,14 @@ public class Post {
         this.created = created;
     }
 
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -92,6 +112,7 @@ public class Post {
                 + ", name='" + name + '\''
                 + ", description='" + description + '\''
                 + ", created=" + created
+                + ", comments=" + comments
                 + '}';
     }
 }

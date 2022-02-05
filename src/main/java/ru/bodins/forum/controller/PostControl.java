@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.bodins.forum.model.Author;
 import ru.bodins.forum.model.Post;
-import ru.bodins.forum.model.User;
 import ru.bodins.forum.service.PostService;
 import java.util.Date;
 
@@ -49,8 +48,8 @@ public class PostControl {
     public String view(@RequestParam("id") int id, Model model) {
         System.out.println("****Working controller VIEW****");
         Post post = service.findPostById(id);
-        Author author = Author.of(1, "Gomer Simpson");
-        System.out.println(post);
+        Author author = service.findAuthorById(2);
+//        System.out.println(post);
         model.addAttribute("post", post);
         model.addAttribute("author", author);
         model.addAttribute("user", SecurityContextHolder

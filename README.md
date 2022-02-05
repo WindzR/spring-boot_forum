@@ -2,7 +2,7 @@
 Проект "Форум" [job4j](https://job4j.ru/).
 
 ![forum_1](images/index.png)
-![forum_2](images/post.png)
+![forum_2](images/post_2.png)
 
 
 ### Этот проект представляет веб приложение форума для создания и обсуждения различных тем.

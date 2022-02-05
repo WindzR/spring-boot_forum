@@ -1,12 +1,23 @@
 package ru.bodins.forum.model;
 
+import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
+@Entity
+@Table(name = "authors")
 public class Author {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String name;
+
+    @OneToMany(mappedBy = "author",
+            cascade = CascadeType.MERGE)
+    private Set<Comment> comments = new HashSet<>();
 
     public Author() {
     }
@@ -16,6 +27,10 @@ public class Author {
         author.id = id;
         author.name = name;
         return author;
+    }
+
+    public void addComment(Comment comment) {
+        comments.add(comment);
     }
 
     public int getId() {
@@ -32,6 +47,14 @@ public class Author {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
     }
 
     @Override
@@ -56,6 +79,7 @@ public class Author {
         return "Author{"
                 + "id=" + id
                 + ", name='" + name + '\''
+                + ", comments=" + comments
                 + '}';
     }
 }
