@@ -3,6 +3,8 @@
 
 ![forum_1](images/index.png)
 ![forum_2](images/post_2.png)
+![forum_3](images/login.png)
+![forum_4](images/Registration.png)
 
 
 ### Этот проект представляет веб приложение форума для создания и обсуждения различных тем.
