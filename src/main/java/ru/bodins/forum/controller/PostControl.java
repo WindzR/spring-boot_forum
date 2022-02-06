@@ -49,7 +49,6 @@ public class PostControl {
         System.out.println("****Working controller VIEW****");
         Post post = service.findPostById(id);
         Author author = service.findAuthorById(2);
-//        System.out.println(post);
         model.addAttribute("post", post);
         model.addAttribute("author", author);
         model.addAttribute("user", SecurityContextHolder

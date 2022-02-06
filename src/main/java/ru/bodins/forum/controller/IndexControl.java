@@ -25,7 +25,6 @@ public class IndexControl {
         model.addAttribute("posts", postList);
         model.addAttribute("user", SecurityContextHolder
                 .getContext().getAuthentication().getPrincipal());
-//        System.out.println("Все посты на форуме ---> " + postList);
         return "index";
     }
 }
