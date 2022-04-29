@@ -16,7 +16,8 @@ public class Author {
     private String name;
 
     @OneToMany(mappedBy = "author",
-            cascade = CascadeType.MERGE)
+            cascade = CascadeType.MERGE,
+            fetch = FetchType.EAGER)
     private Set<Comment> comments = new HashSet<>();
 
     public Author() {
@@ -35,10 +36,6 @@ public class Author {
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {

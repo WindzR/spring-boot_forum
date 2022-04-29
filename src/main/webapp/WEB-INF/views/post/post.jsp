@@ -92,5 +92,28 @@
     </div>
 </c:forEach>
 
+<div class="col s6 offset-s3" style="margin-top: 25px;">
+    <div class="card horizontal">
+        <div class="card-stacked row">
+            <form class="col" action="<c:url value='/save/comment'/>" method="post">
+                <div class="card-content" style="padding: 8px 16px">
+                    <input hidden name="post_id" value="${post.id}">
+                    <div class="row" style="margin-bottom: 0">
+                        <div class="input-field col s12">
+                            <input id="comment" type="text" name="desc" class="validate" required>
+                            <label class="active" for="comment">Новое сообщение</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-action center-align" style="padding: 8px">
+                    <button type="submit" class="waves-effect waves-light btn">
+                        отправить
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

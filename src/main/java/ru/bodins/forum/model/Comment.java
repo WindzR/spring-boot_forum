@@ -17,7 +17,10 @@ public class Comment {
     @Temporal(TemporalType.TIMESTAMP)
     private Date created;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = {CascadeType.PERSIST,
+                            CascadeType.MERGE,
+                            CascadeType.DETACH,
+                            CascadeType.REFRESH})
     @JoinColumn(name = "author_id")
     private Author author;
 
@@ -34,10 +37,6 @@ public class Comment {
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getComment() {

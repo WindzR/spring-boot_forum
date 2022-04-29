@@ -27,6 +27,17 @@ public class Post {
         inverseJoinColumns = @JoinColumn(name = "comment_id"))
     private Set<Comment> comments = new HashSet<>();
 
+    public Post() {
+    }
+
+    public Post(int id, String name, String description) {
+        Date date = new Date();
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.created = date;
+    }
+
     public static Post of(String name) {
         Post post = new Post();
         post.name = name;
@@ -47,10 +58,6 @@ public class Post {
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {

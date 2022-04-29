@@ -2,9 +2,11 @@ package ru.bodins.forum.service;
 
 import org.springframework.stereotype.Service;
 import ru.bodins.forum.dao.AuthorRepository;
+import ru.bodins.forum.dao.CommentRepository;
 import ru.bodins.forum.dao.PostRepository;
 import ru.bodins.forum.exception.PostNotFoundException;
 import ru.bodins.forum.model.Author;
+import ru.bodins.forum.model.Comment;
 import ru.bodins.forum.model.Post;
 
 import java.util.ArrayList;
@@ -21,9 +23,13 @@ public class PostService {
 
     private final AuthorRepository authorDAO;
 
-    public PostService(PostRepository postDAO, AuthorRepository authorDAO) {
+    private final CommentRepository commentDAO;
+
+    public PostService(PostRepository postDAO, AuthorRepository authorDAO,
+                       CommentRepository commentDAO) {
         this.postDAO = postDAO;
         this.authorDAO = authorDAO;
+        this.commentDAO = commentDAO;
     }
 
     public List<Post> getAll() {
@@ -52,5 +58,13 @@ public class PostService {
 
     public Author findAuthorById(int id) {
         return authorDAO.findAuthorById(id);
+    }
+
+    public Author findAuthorByName(String name) {
+        return authorDAO.findAuthorByName(name);
+    }
+
+    public void saveComment(Comment comment) {
+        commentDAO.save(comment);
     }
 }
