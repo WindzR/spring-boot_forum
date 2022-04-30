@@ -34,7 +34,7 @@
                             </div>
                             <c:if test="${not empty errorMessage}">
                                 <div class="input-field col s12">
-                                        <span class="helper-text" data-error="wrong" data-success="right" style="font-size: 14px">
+                                        <span class="helper-text" id="error-message" data-error="wrong" data-success="right" style="font-size: 14px">
                                                 ${errorMessage}
                                         </span>
                                 </div>

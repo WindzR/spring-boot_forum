@@ -41,7 +41,6 @@ public class PostControl {
         System.out.println("****Working controller UPDATE****");
         Post post = service.findPostById(id);
         post.setCreated(new Date());
-        System.out.println(post);
         model.addAttribute("post", post);
         return "post/update";
     }
