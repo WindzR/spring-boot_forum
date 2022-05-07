@@ -7,14 +7,14 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 import ru.bodins.forum.Main;
+import ru.bodins.forum.dao.AuthorityRepository;
 import ru.bodins.forum.dao.UserRepository;
 import ru.bodins.forum.model.User;
 
-import java.util.List;
+import javax.annotation.PostConstruct;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -28,6 +28,19 @@ public class LoginControlTest {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private AuthorityRepository authorities;
+
+    @PostConstruct
+    public void setUp() {
+        User testUser = User.of("test");
+        testUser.setEnabled(true);
+        testUser.setPassword("password");
+        testUser.setAuthority(authorities.findByAuthority("ROLE_USER"));
+        userRepository.save(testUser);
+        System.out.println("Save test user");
+    }
 
     @Test
     public void incorrectUsername() throws Exception {
@@ -47,7 +60,7 @@ public class LoginControlTest {
 
     @Test
     public void correctUsernameAndPassword() throws Exception {
-        this.mockMvc.perform(formLogin().user("root").password("root"))
+        this.mockMvc.perform(formLogin().user("test").password("password"))
                 .andDo(print())
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/"));
