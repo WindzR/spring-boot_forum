@@ -38,7 +38,7 @@ public class LoginControlTest {
 
     @Test
     public void correctUsernameAndPassword() throws Exception {
-        this.mockMvc.perform(formLogin().user("root").password("root"))
+        this.mockMvc.perform(formLogin().user("").password("password"))
                 .andDo(print())
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/"));
