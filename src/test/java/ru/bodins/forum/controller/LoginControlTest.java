@@ -2,19 +2,17 @@ package ru.bodins.forum.controller;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import ru.bodins.forum.Main;
-import ru.bodins.forum.dao.AuthorityRepository;
-import ru.bodins.forum.dao.UserRepository;
-import ru.bodins.forum.model.User;
-
-import javax.annotation.PostConstruct;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -25,22 +23,6 @@ public class LoginControlTest {
 
     @Autowired
     private MockMvc mockMvc;
-
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private AuthorityRepository authorities;
-
-    @PostConstruct
-    public void setUp() {
-        User testUser = User.of("test");
-        testUser.setEnabled(true);
-        testUser.setPassword("password");
-        testUser.setAuthority(authorities.findByAuthority("ROLE_USER"));
-        userRepository.save(testUser);
-        System.out.println("Save test user");
-    }
 
     @Test
     public void incorrectUsername() throws Exception {
@@ -59,8 +41,18 @@ public class LoginControlTest {
     }
 
     @Test
+    @WithMockUser
+    public void whenCheckLoginUrlWithMockUser() throws Exception {
+        this.mockMvc.perform(get("/login"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(view().name("login"));
+    }
+
+    @Test
+    @Sql(value = "/before-test-login.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     public void correctUsernameAndPassword() throws Exception {
-        this.mockMvc.perform(formLogin().user("test").password("password"))
+        this.mockMvc.perform(formLogin().user("root").password("root"))
                 .andDo(print())
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/"));
